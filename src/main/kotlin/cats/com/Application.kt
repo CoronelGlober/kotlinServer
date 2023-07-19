@@ -16,6 +16,7 @@ fun main(args: Array<String>) {
     val httpPort = args.getOrNull(1)?.toInt() ?: 8080
     val httpsPort = args.getOrNull(21)?.toInt() ?: 8443
     val keyStoreFile = File(sslKeys)
+
     val environment = applicationEngineEnvironment {
         log = LoggerFactory.getLogger("ktor.application")
         connector {
