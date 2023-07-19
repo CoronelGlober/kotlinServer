@@ -10,6 +10,7 @@ import java.security.KeyStore
 
 
 fun main(args: Array<String>) {
+
     val server = args.firstOrNull() ?: "192.168.1.9"
     val sslKeys = args.getOrNull(3) ?: "/Users/david_coronel/Downloads/cats-server/server_jks.jks"
     val httpPort = args.getOrNull(1)?.toInt() ?: 8080
