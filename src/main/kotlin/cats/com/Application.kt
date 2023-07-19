@@ -4,7 +4,6 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import cats.com.plugins.*
-import io.ktor.network.tls.certificates.*
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.security.KeyStore
