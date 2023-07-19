@@ -1,9 +1,12 @@
 pipeline {
   agent any
+
   triggers {
     githubPush()
   }
+
   stages {
+
         stage('build') {
             steps {
                 def currentDate = new Date().format('yyyyMMddHHmmss')
