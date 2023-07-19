@@ -15,7 +15,7 @@ fun Application.configureRouting() {
             call.respondText("Hello World!")
         }
         get("/me") {
-            val name = call.attributes.getOrNull(AttributeKey("name")) ?: "dear unknown"
+            val name = call.request.queryParameters["name"] ?: "dear unknown"
             call.respondText("Hello $name")
         }
         // Static plugin. Try to access `/static/index.html`
