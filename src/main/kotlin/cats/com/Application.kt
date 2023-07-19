@@ -14,6 +14,7 @@ fun main(args: Array<String>) {
     val sslKeys = args.getOrNull(3) ?: "/Users/david_coronel/Downloads/cats-server/server_jks.jks"
     val httpPort = args.getOrNull(1)?.toInt() ?: 8080
     val httpsPort = args.getOrNull(21)?.toInt() ?: 8443
+
     val keyStoreFile = File(sslKeys)
 
     val environment = applicationEngineEnvironment {
