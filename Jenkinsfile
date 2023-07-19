@@ -19,11 +19,12 @@ pipeline {
 
         stage('deploy') {
             steps {
-                echo "DVD - Starting scp connection"
                 sshagent(['DEPLOYER_SSH_KEY']) {
                     sh "scp -o StrictHostKeyChecking=no build/libs/* deployer@ec2-18-188-25-57.us-east-2.compute.amazonaws.com:/var/www/kotlin_server/"
                 }
-                echo "DVD - finished scp connection"
+                sshagent(['ROOT_USER_KEY']) {
+                    sh 'ssh ubuntu@ec2-18-188-25-57.us-east-2.compute.amazonaws.com "sudo supervisorctl restart kotlin_server_p"'
+                }
             }
         }
     }
