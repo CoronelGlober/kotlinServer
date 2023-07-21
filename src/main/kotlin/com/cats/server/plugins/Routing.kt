@@ -1,12 +1,11 @@
-package cats.com.plugins
+package com.cats.server.plugins
 
-import cats.com.controllers.meRoutes
+import com.cats.server.controllers.meRoutes
 import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.http.content.*
 import io.ktor.server.application.*
 import io.ktor.server.plugins.swagger.*
-import io.ktor.util.*
 
 fun Application.configureRouting() {
     

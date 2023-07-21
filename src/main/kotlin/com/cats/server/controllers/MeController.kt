@@ -1,4 +1,4 @@
-package cats.com.controllers
+package com.cats.server.controllers
 
 import io.ktor.server.application.*
 import io.ktor.server.http.*

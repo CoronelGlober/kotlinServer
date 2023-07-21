@@ -1,13 +1,15 @@
-package cats.com
+package com.cats.server
 
+import com.cats.server.db.TransactionsDB
+import com.cats.server.plugins.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import cats.com.plugins.*
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.security.KeyStore
 
+val db by lazy { TransactionsDB }
 
 fun main(args: Array<String>) {
 
@@ -42,7 +44,7 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
     configureSerialization()
-//    configureDatabases()
+    configureDatabases(db.playerRepository)
     configureMonitoring()
     configureHTTP()
 //    configureSecurity()

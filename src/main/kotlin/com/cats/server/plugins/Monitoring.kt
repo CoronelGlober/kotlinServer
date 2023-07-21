@@ -1,4 +1,4 @@
-package cats.com.plugins
+package com.cats.server.plugins
 
 import io.ktor.server.plugins.callloging.*
 import org.slf4j.event.*

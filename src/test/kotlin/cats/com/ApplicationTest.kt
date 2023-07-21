@@ -5,7 +5,7 @@ import io.ktor.client.statement.*
 import io.ktor.server.testing.*
 import kotlin.test.*
 import io.ktor.http.*
-import cats.com.plugins.*
+import com.cats.server.plugins.configureRouting
 
 class ApplicationTest {
     @Test

@@ -1,19 +1,20 @@
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
-val exposed_version : String by project
-val h2_version : String by project
+val exposed_version: String by project
+val h2_version: String by project
 
 plugins {
     kotlin("jvm") version "1.9.0"
     id("io.ktor.plugin") version "2.3.2"
-                id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    id("org.jetbrains.kotlin.plugin.serialization") version "1.9.0"
+    id("app.cash.sqldelight") version "2.0.0-rc02"
 }
 
-group = "cats.com"
+group = "com.cats.server"
 version = "0.0.1"
 application {
-    mainClass.set("cats.com.ApplicationKt")
+    mainClass.set("com.cats.server.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -44,4 +45,21 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     implementation("io.ktor:ktor-network-tls-certificates:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+    implementation("app.cash.sqldelight:jdbc-driver:2.0.0-rc02")
+    implementation("com.zaxxer:HikariCP:5.0.1")
+    implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+}
+
+sqldelight {
+    databases {
+        create("Transactions") {
+            //srcDirs("sqldelight")
+            //deriveSchemaFromMigrations.set(true)
+            packageName.set("com.cats")
+            dialect("app.cash.sqldelight:mysql-dialect:2.0.0-rc02")
+            verifyMigrations.set(true)
+            //schemaOutputDirectory.set(file("src/main/sqldelight/databases"))
+            migrationOutputDirectory.set(file("src/main/sqldelight/migrations"))
+        }
+    }
 }

@@ -1,0 +1,17 @@
+
+CREATE TABLE hockeyPlayer (
+  player_number INTEGER PRIMARY KEY NOT NULL,
+  full_name TEXT NOT NULL
+);
+
+upsert:
+INSERT INTO hockeyPlayer VALUES ?;
+
+selectByUid:
+SELECT * FROM hockeyPlayer WHERE player_number = :id;
+
+selectAll:
+SELECT * FROM hockeyPlayer LIMIT :limit;
+
+remove:
+DELETE FROM hockeyPlayer WHERE player_number = :playerNumber;
