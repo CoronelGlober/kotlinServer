@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
+        APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
     }
 
     triggers {
@@ -24,6 +25,7 @@ pipeline {
         stage('upload to appcenter') {
             steps {
                 sh(script: 'bundle install --path vendor/bundle --with=fastlane && bundle update', label: 'Updating fastlane dependencies')
+                sh(script: 'yes | ${env.ANDROID_HOME}/bin/sdkmanager --licenses --sdk_root=${env.ANDROID_HOME}', label: 'Accepting Android SDK Licenses')
                 dir("Empty") {
                     sh(script: 'bundle exec fastlane appCentr --env $APP_CENTER_API_TOKEN',
                             label: 'Deploying a new server build'
