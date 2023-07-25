@@ -45,4 +45,20 @@ platform :android do
     gradle(task: "clean assembleRelease")
     upload_to_play_store
   end
+
+  desc "Publish the result apk into appcenter"
+  lane :appCentr do
+    gradle(
+        tasks: ["clean", ":Empty:assembleRelease"],
+        gradle_path: "../gradlew"
+         )
+    appcenter_upload(
+      api_token: ENV["APP_CENTER_API_TOKEN"],
+      owner_name: "Coronel-Org",
+      owner_type: "user", # Default is user - set to organization for appcenter organizations
+      app_name: "Empty-Screen-App",
+      file: "build/outputs/apk/release/Empty-release-unsigned.apk",
+      notify_testers: true # Set to false if you don't want to notify testers of your new release (default: `false`)
+    )
+  end
 end

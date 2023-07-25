@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+
+    environment {
+        APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
+    }
+
+    triggers {
+        githubPush()
+    }
+
+    stages {
+
+        stage('Clean') {
+            steps {
+                echo "DVD - Starting gradle clean"
+                withGradle {
+                    sh './gradlew :Empty:Clean'
+                }
+                echo "DVD - Finished gradle clean"
+            }
+        }
+
+        stage('upload to appcenter') {
+            steps {
+                sh(script: 'bundle update', label: 'Updating fastlane dependencies')
+                dir("Empty") {
+                    sh(script: 'bundle exec fastlane appCentr --env $APP_CENTER_API_TOKEN',
+                            label: 'Deploying a new server build'
+                    )
+                }
+            }
+        }
+    }
+}
