@@ -23,7 +23,7 @@ pipeline {
 
         stage('upload to appcenter') {
             steps {
-                sh(script: 'gem install fastlane && bundle update', label: 'Updating fastlane dependencies')
+                sh(script: 'bundle install fastlane && bundle update', label: 'Updating fastlane dependencies')
                 sh(script: 'bundle exec fastlane appCentr --env $APP_CENTER_API_TOKEN',
                         label: 'Deploying a new server build'
                 )
