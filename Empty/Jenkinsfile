@@ -24,11 +24,9 @@ pipeline {
         stage('upload to appcenter') {
             steps {
                 sh(script: 'bundle update', label: 'Updating fastlane dependencies')
-                dir("Empty") {
-                    sh(script: 'bundle exec fastlane appCentr --env $APP_CENTER_API_TOKEN',
-                            label: 'Deploying a new server build'
-                    )
-                }
+                sh(script: 'bundle exec fastlane appCentr --env $APP_CENTER_API_TOKEN',
+                        label: 'Deploying a new server build'
+                )
             }
         }
     }
