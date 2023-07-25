@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
-        APP_CENTER_API_TOKEN = credentials('APP_CENTER_API_TOKEN')
     }
 
     triggers {
